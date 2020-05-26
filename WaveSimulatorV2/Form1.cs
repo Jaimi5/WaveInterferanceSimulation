@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -11,74 +12,79 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace WaveSimulatorV2 {
     public partial class WaveInterferanceSimulator : Form {
+
+        public const double LIGHTSPEED = 2.9979e10;
+        private Random Random = new Random();
+
         public WaveInterferanceSimulator() {
             InitializeComponent();
         }
 
         private void Form1_Load(object sender, EventArgs e) {
-
+            chart1.Series.Clear();
         }
 
         private double Precision;
 
         private void button1_Click(object sender, EventArgs e) {
-            var chart = chart1.ChartAreas[0];
-            chart.AxisX.IntervalType = DateTimeIntervalType.Number;
-
-            //chart1.ChartAreas[0].AxisY.MajorGrid.Interval = 3; 
-            //chart1.ChartAreas[0].AxisY.MajorGrid.IntervalOffset = 2;  
-            //chart1.ChartAreas[0].AxisY.MajorTickMark.Interval = 0.2; 
-            //chart1.ChartAreas[0].AxisY.MajorTickMark.IntervalOffset = 0.5;            
-
-            chart.AxisX.Interval = 1;
-            chart.AxisY.Interval = Math.Pow(10, -23);
-            if (!chart1.Series.Any(x => x.Name == "Interference")) {
-                chart1.Series.Add("Interference");
-                chart1.Series["Interference"].ChartType = SeriesChartType.FastLine;
-                chart1.Series["Interference"].Color = Color.Black;
-                chart1.Series[0].IsVisibleInLegend = false;
-                chart1.Series["Interference"].MarkerStep = 10;
-
-            }
+            chart1.ChartAreas[0].AxisX.IntervalType = DateTimeIntervalType.Number;
+            chart1.ChartAreas[0].AxisX.Interval = 1;
 
             int numberofSlits = (int)SlitsNumber.Value;
             double wavelenght = double.Parse(WavelenghtValue.Text) * Math.Pow(10, -10); //Amstrongs
-            //double amplitude = GetAmplitude(wavelenght);
             double distancetoScreen = double.Parse(Distance.Text) * Math.Pow(10, -3); //milimeters
-            double amplitude = double.Parse(SlitsWidth.Text) * Math.Pow(10, -3); //milimeters
+            double slitsWidth = double.Parse(SlitsWidth.Text) * Math.Pow(10, -3); //milimeters
+            double amplitude = double.Parse(Amplitude.Text) * Math.Pow(10, -3); //milimeters
             double DistanceBetweenSlits = double.Parse(DistanceSlits.Text) * Math.Pow(10, -3); //milimeters
+            int distanceOfScreen = (int)DistanceOftheScreen.Value;
+            int numberOfLights = (int)LightNumber.Value;
 
-            Precision = wavelenght / 10;
+            string ChartSerie = "Slits: " + numberofSlits + "\n Ligts: " + numberOfLights + "\n Wavelenght: " + wavelenght + "\n DistanceToScreen: " + distancetoScreen + "\n SlitsWidth: " + slitsWidth;
+
+            if (!chart1.Series.Any(x => x.Name == ChartSerie)) {
+                chart1.Series.Add(ChartSerie);
+                chart1.Series[ChartSerie].ChartType = SeriesChartType.FastLine;
+                chart1.Series[ChartSerie].Color = Color.FromArgb(Random.Next(256), Random.Next(256), Random.Next(256));
+                chart1.Series[ChartSerie].MarkerStep = 10;
+            }
+
+            Precision = Math.Pow(10, -6);
             List<double> vector = GetVectorSlits(numberofSlits, DistanceBetweenSlits);
-            //chart1.Series["Interference"].Points.Clear();
-            for (int i = -10000; i <= 10000; i++) {
+            for (int i = -1000 * distanceOfScreen; i <= 1000 * distanceOfScreen; i++) {
                 var aux = GetElectricFieldOfaPoint(i, distancetoScreen, amplitude, wavelenght, numberofSlits, vector);
-                chart1.Series["Interference"].Points.AddXY(i, aux);
+                chart1.Series[ChartSerie].Points.AddXY((double)i / 1000, aux);
             }
 
         }
-
-
 
         private double GetDistance(int r, double distancetoScreen, double distanceToCenter) {
             return Math.Sqrt(Math.Pow(distanceToCenter - r * Precision, 2) + Math.Pow(distancetoScreen, 2));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="r"></param>
+        /// <param name="distancetoScreen"></param>
+        /// <param name="amplitude"></param>
+        /// <param name="wavelenght"></param>
+        /// <param name="numberofSlits"></param>
+        /// <param name="distanceVector"></param>
+        /// <returns></returns>
         private double GetElectricFieldOfaPoint(int r, double distancetoScreen, double amplitude, double wavelenght, int numberofSlits, List<double> distanceVector) {
-            int M = 10;
+            double M = 10;
             double result = 0;
-            for (int j = 0; j < numberofSlits; j++) {
-                double mitjana = 0;
-                double distance = GetDistance(r, distancetoScreen, distanceVector[j]);
-                for (int i = 1; i < M; i++)
-                    mitjana += (amplitude / distance) * Math.Cos(2 * Math.PI * ((distance / wavelenght) - (i / M)));
-                result += Math.Pow(mitjana / M, 2);
-            }
-            return result;
-        }
 
-        private double GetAmplitude(double waveLenght) {
-            return waveLenght / (2 * Math.PI);
+            for (int m = 0; m < 10; m++) {
+                double mitjana = 0;
+                for (int j = 0; j < numberofSlits; j++) {
+                    double distance = GetDistance(r, distancetoScreen, distanceVector[j]);
+                    mitjana += (amplitude / distance) * Math.Cos(2 * Math.PI * ((distance / wavelenght) - (m / M)));
+                }
+                result += Math.Pow(mitjana, 2);
+            }
+
+            return result / 10;
         }
 
         private List<double> GetVectorSlits(int numberSlits, double distanceSlits) {
@@ -108,7 +114,7 @@ namespace WaveSimulatorV2 {
         }
 
         private void ClearChart_Click(object sender, EventArgs e) {
-            chart1.Series["Interference"].Points.Clear();
+            chart1.Series.Clear();
         }
     }
 }
