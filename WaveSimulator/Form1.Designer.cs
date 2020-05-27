@@ -1,4 +1,4 @@
-﻿namespace WaveSimulatorV2 {
+﻿namespace WaveSimulator {
     partial class WaveInterferanceSimulator {
         /// <summary>
         /// Required designer variable.

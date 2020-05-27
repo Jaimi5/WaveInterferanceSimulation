@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
-namespace WaveSimulatorV2 {
+namespace WaveSimulator {
     public partial class WaveInterferanceSimulator : Form {
 
         public const double LIGHTSPEED = 2.9979e10;
