@@ -1,4 +1,4 @@
-# WaveInterferanceSimulation
+# Wave Interferance Simulation
 
 This Simulation is made in the context of a Project in the Subject of "Fisica dels Dispositius de Memória" in the Universitat de Barcelona.
 
