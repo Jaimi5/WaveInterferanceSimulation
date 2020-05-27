@@ -23,9 +23,9 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.button1 = new System.Windows.Forms.Button();
             this.lambdatext = new System.Windows.Forms.Label();
             this.dist = new System.Windows.Forms.Label();
@@ -45,10 +45,17 @@
             this.label3 = new System.Windows.Forms.Label();
             this.DistanceOftheScreen = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
+            this.RadioButtons = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.Ex4 = new System.Windows.Forms.RadioButton();
+            this.Ex3 = new System.Windows.Forms.RadioButton();
+            this.Ex2 = new System.Windows.Forms.RadioButton();
+            this.Ex1 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SlitsNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LightNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DistanceOftheScreen)).BeginInit();
+            this.RadioButtons.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -120,20 +127,21 @@
             // 
             // chart1
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chart1.Legends.Add(legend2);
+            this.chart1.BackColor = System.Drawing.Color.Orange;
+            chartArea1.BackSecondaryColor = System.Drawing.Color.Silver;
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(12, 12);
             this.chart1.Name = "chart1";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chart1.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
             this.chart1.Size = new System.Drawing.Size(1686, 999);
             this.chart1.TabIndex = 9;
             this.chart1.Text = "chart1";
-            this.chart1.Click += new System.EventHandler(this.chart1_Click);
             // 
             // SlitsNumber
             // 
@@ -231,11 +239,77 @@
             this.label4.TabIndex = 19;
             this.label4.Text = "Distance of the Screen";
             // 
+            // RadioButtons
+            // 
+            this.RadioButtons.Controls.Add(this.button2);
+            this.RadioButtons.Controls.Add(this.Ex4);
+            this.RadioButtons.Controls.Add(this.Ex3);
+            this.RadioButtons.Controls.Add(this.Ex2);
+            this.RadioButtons.Controls.Add(this.Ex1);
+            this.RadioButtons.Location = new System.Drawing.Point(1738, 617);
+            this.RadioButtons.Name = "RadioButtons";
+            this.RadioButtons.Size = new System.Drawing.Size(145, 169);
+            this.RadioButtons.TabIndex = 20;
+            this.RadioButtons.TabStop = false;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(21, 112);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(105, 34);
+            this.button2.TabIndex = 21;
+            this.button2.Text = "SelectExercice";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // Ex4
+            // 
+            this.Ex4.AutoSize = true;
+            this.Ex4.Location = new System.Drawing.Point(53, 89);
+            this.Ex4.Name = "Ex4";
+            this.Ex4.Size = new System.Drawing.Size(43, 17);
+            this.Ex4.TabIndex = 3;
+            this.Ex4.Text = "Ex4";
+            this.Ex4.UseVisualStyleBackColor = true;
+            // 
+            // Ex3
+            // 
+            this.Ex3.AutoSize = true;
+            this.Ex3.Location = new System.Drawing.Point(53, 66);
+            this.Ex3.Name = "Ex3";
+            this.Ex3.Size = new System.Drawing.Size(43, 17);
+            this.Ex3.TabIndex = 2;
+            this.Ex3.Text = "Ex3";
+            this.Ex3.UseVisualStyleBackColor = true;
+            // 
+            // Ex2
+            // 
+            this.Ex2.AutoSize = true;
+            this.Ex2.Location = new System.Drawing.Point(53, 43);
+            this.Ex2.Name = "Ex2";
+            this.Ex2.Size = new System.Drawing.Size(43, 17);
+            this.Ex2.TabIndex = 1;
+            this.Ex2.Text = "Ex2";
+            this.Ex2.UseVisualStyleBackColor = true;
+            // 
+            // Ex1
+            // 
+            this.Ex1.AutoSize = true;
+            this.Ex1.Checked = true;
+            this.Ex1.Location = new System.Drawing.Point(54, 20);
+            this.Ex1.Name = "Ex1";
+            this.Ex1.Size = new System.Drawing.Size(43, 17);
+            this.Ex1.TabIndex = 0;
+            this.Ex1.TabStop = true;
+            this.Ex1.Text = "Ex1";
+            this.Ex1.UseVisualStyleBackColor = true;
+            // 
             // WaveInterferanceSimulator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1904, 1041);
+            this.Controls.Add(this.RadioButtons);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.DistanceOftheScreen);
             this.Controls.Add(this.label3);
@@ -263,6 +337,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.SlitsNumber)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.LightNumber)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DistanceOftheScreen)).EndInit();
+            this.RadioButtons.ResumeLayout(false);
+            this.RadioButtons.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -289,6 +365,12 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lambdatext;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.GroupBox RadioButtons;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.RadioButton Ex4;
+        private System.Windows.Forms.RadioButton Ex3;
+        private System.Windows.Forms.RadioButton Ex2;
+        private System.Windows.Forms.RadioButton Ex1;
     }
 }
 
