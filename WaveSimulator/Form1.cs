@@ -154,10 +154,12 @@ namespace WaveSimulator {
             } else if(Ex3.Checked) {
                 SlitsWidth.Text = "0,02";
                 LightNumber.Value = 20;
+                DistanceOftheScreen.Value = 15;
             } else {
                 SlitsWidth.Text = "0,02";
                 LightNumber.Value = 20;
                 DistanceSlits.Text = "0,1";
+                DistanceOftheScreen.Value = 15;
             }
         }
 
